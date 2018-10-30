@@ -1,0 +1,10 @@
+N = 10; %given parameters
+l = .2;
+L = 2.6e-6;
+mu0 = 1.25663706e-6;
+f =@(a,L) mu0*N^2*pi()*a^2/l^2*((l^2+a^2)^(1/2)-a)-L; %equation
+%[root,fx,ea,iter] = falsepos(f,0,1,.0001,50,L); %calls falsepos function
+[root,fx,ea,iter] = bisect(f,0,1,.0001,50,L); %calls bisect function
+a = root * 100 %outputs a in cm
+n = iter %outputs number iterations
+finale = ea %outputs final error
