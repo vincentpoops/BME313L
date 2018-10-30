@@ -1,0 +1,14 @@
+function [J,f]=receptor_ligand_func_VL(x,varargin)
+del=0.01; %specified change
+df1dx1=(u(x(1)+del,x(2))-u(x(1),x(2)))/del; %partial forward difference approximations
+df1dx2=(u(x(1),x(2)+del)-u(x(1),x(2)))/del;
+df2dx1=(v(x(1)+del,x(2))-v(x(1),x(2)))/del;
+df2dx2=(v(x(1),x(2)+del)-v(x(1),x(2)))/del;
+J=[df1dx1 df1dx2;df2dx1 df2dx2]; %forms jacobian matrix
+f1=u(x(1),x(2)); %function parameters
+f2=v(x(1),x(2));
+f=[f1;f2];
+function f=u(x,y) %derived functions (solving for roots)
+f =(5000*x+10000*y)/(((24000-15000*x-20000*y)^3)*5000*(1-x))-7.19e-14;
+function f=v(x,y)
+f =(5000*x+10000*y)/(((24000-15000*x-20000*y)^2)*10000*(1-y))-6e-10;
